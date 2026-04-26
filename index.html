@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Kirality Labs | AI Agents for Revenue Teams</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "brand-green": "#00FF41",
+            "brand-dark": "#0A0A0A",
+            "outline": "#6b7c65",
+            "on-primary-fixed": "#002203",
+            "surface-container": "#efeded",
+            "on-secondary-container": "#656464",
+            "outline-variant": "#b9ccb2",
+            "primary-container": "#00ff41",
+            "on-background": "#1b1c1c",
+            "inverse-on-surface": "#f2f0f0",
+            "surface-tint": "#006e16",
+            "secondary-fixed-dim": "#c9c6c5",
+            "on-primary-container": "#007117",
+            "tertiary-container": "#dddddd",
+            "secondary-fixed": "#e5e2e1",
+            "surface-dim": "#dbdad9",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed-variant": "#00530e",
+            "surface": "#fbf9f8",
+            "background": "#fbf9f8",
+            "on-surface": "#1b1c1c",
+            "surface-container-low": "#f5f3f3",
+            "on-surface-variant": "#3b4b37",
+            "primary": "#006e16",
+            "on-error-container": "#93000a",
+            "secondary-container": "#e5e2e1",
+            "on-tertiary-fixed-variant": "#454747",
+            "surface-variant": "#e4e2e2",
+            "surface-container-high": "#e9e8e7",
+            "surface-container-highest": "#e4e2e2",
+            "secondary": "#5f5e5e",
+            "on-secondary-fixed-variant": "#474646",
+            "inverse-surface": "#303031",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "primary-fixed": "#72ff70",
+            "surface-bright": "#fbf9f8",
+            "primary-fixed-dim": "#00e639",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "tertiary-fixed": "#e2e2e2",
+            "inverse-primary": "#00e639",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#1a1c1c",
+            "on-tertiary-container": "#606161",
+            "on-secondary-fixed": "#1c1b1b",
+            "error": "#ba1a1a",
+            "tertiary": "#5d5f5f"
+          },
+          borderRadius: {
+            "DEFAULT": "0px",
+            "lg": "0px",
+            "xl": "0px",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "mono-data": ["monospace"],
+            "label-sm": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "headline-md": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ── Base resets ── */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+
+    /* ── Scroll-reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Nav link underline ── */
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00FF41;
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── Card lift ── */
+    .card-lift {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+    }
+
+    /* ── Primary button ── */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #0A0A0A;
+      transform: translateY(100%);
+      transition: transform 0.25s ease;
+    }
+    .btn-primary:hover::before { transform: translateY(0); }
+    .btn-primary:hover { color: #00FF41; }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:active { transform: scale(0.96); }
+
+    /* ── Ghost button ── */
+    .btn-ghost {
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-ghost:hover { background: #0A0A0A; color: #00FF41; border-color: #0A0A0A; }
+    .btn-ghost:active { transform: scale(0.96); }
+
+    /* ── Form field focus ring ── */
+    .field-input {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .field-input:focus {
+      border-color: #00FF41 !important;
+      border-width: 2px;
+      box-shadow: 0 0 0 3px rgba(0,255,65,0.12);
+      outline: none;
+    }
+    .field-input.error {
+      border-color: #ba1a1a !important;
+      border-width: 2px;
+      box-shadow: 0 0 0 3px rgba(186,26,26,0.10);
+    }
+
+    /* ── Success overlay ── */
+    .form-success {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .form-success.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* ── Stat counter ── */
+    .stat-num { font-variant-numeric: tabular-nums; }
+
+    /* ── FAQ accordion ── */
+    details summary { user-select: none; }
+    details[open] summary .faq-icon { transform: rotate(180deg); }
+    .faq-icon { transition: transform 0.3s ease; }
+    details .faq-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, opacity 0.35s ease;
+      opacity: 0;
+    }
+    details[open] .faq-body {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    #mobile-menu.open { max-height: 320px; }
+
+    /* ── Loading spinner ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+    }
+
+    /* ── Pulse dot ── */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #00FF41;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    /* ── Toast notification ── */
+    #toast {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 9999;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── Pricing card highlight ── */
+    .pricing-popular {
+      transform: scale(1.04);
+      box-shadow: 0 8px 40px rgba(0,255,65,0.18);
+    }
+
+    /* ── Marquee ── */
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    /* ── Grayscale image hover ── */
+    .img-reveal {
+      filter: grayscale(1) brightness(0.9);
+      transition: filter 0.5s ease;
+    }
+    .img-reveal:hover { filter: grayscale(0) brightness(1); }
+
+    /* ── Testimonial card ── */
+    .testimonial-card {
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .testimonial-card:hover {
+      border-color: #00FF41;
+      transform: translateY(-3px);
+    }
+
+    /* ── Use-case card ── */
+    .usecase-card {
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    }
+    .usecase-card:hover {
+      border-color: #0A0A0A;
+      background: #0A0A0A;
+      color: #00FF41;
+      transform: translateY(-3px);
+    }
+    .usecase-card:hover p { color: #b0b0b0; }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased">
+
+  <!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-[#E5E5E5] flex items-center px-8 h-16">
+    <a href="#" class="text-xl font-bold tracking-tighter text-black font-headline-lg flex items-center gap-2 mr-auto">
+      <span class="pulse-dot"></span>
+      KIRALITY LABS
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex gap-8 items-center font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="#how-it-works">How It Works</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="#use-cases">Use Cases</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="#customers">Customers</a>
+      <a class="btn-primary bg-[#00FF41] text-black font-bold uppercase px-5 py-2.5 font-label-sm text-sm inline-block" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer"><span>Book a Demo</span></a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <!-- Hamburger -->
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1" aria-label="Menu">
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="fixed top-16 w-full z-40 bg-white border-b border-[#E5E5E5] px-8">
+    <div class="py-6 flex flex-col gap-5 font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="#how-it-works" onclick="closeMobileMenu()">How It Works</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="#use-cases" onclick="closeMobileMenu()">Use Cases</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="#customers" onclick="closeMobileMenu()">Customers</a>
+      <a class="btn-primary inline-block bg-[#00FF41] text-black font-bold uppercase px-4 py-2.5 font-label-sm text-sm" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()"><span>Book a Demo</span></a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section class="relative pt-32 pb-24 bg-white min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center w-full">
+
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 px-3 py-1 bg-primary-container text-on-primary-container font-mono-data text-xs mb-6 uppercase tracking-widest border-l-4 border-primary">
+          <span class="pulse-dot" style="width:6px;height:6px;"></span>
+          AI Agents Built for Revenue Teams
+        </span>
+        <h1 class="font-headline-lg text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-none uppercase">
+          Your Next 100 Leads Won't Come From Cold Calls...
+        </h1>
+        <p class="text-xl text-secondary mb-10 max-w-lg">Scale your outreach, marketing, and social presence with autonomous AI agents that work 24/7 to hit your revenue targets.</p>
+        <div class="flex gap-4 items-center">
+          <span class="material-symbols-outlined text-primary text-4xl" title="Automation">automation</span>
+          <span class="material-symbols-outlined text-primary text-4xl" title="Growth">trending_up</span>
+          <span class="material-symbols-outlined text-primary text-4xl" title="Precision">precision_manufacturing</span>
+        </div>
+      </div>
+
+      <!-- Hero form card -->
+      <div class="reveal bg-white border-2 border-black p-8 relative card-lift" style="transition-delay:0.15s">
+        <h3 class="font-headline-md text-xl mb-6 uppercase">See What an Agent Can Do for Your Business</h3>
+
+        <form id="hero-form" class="space-y-4" novalidate onsubmit="handleForm(event, 'hero-form')">
+          <div class="form-field">
+            <label class="block font-label-sm uppercase text-[10px] mb-1">Full Name <span class="text-error">*</span></label>
+            <input
+              name="name"
+              class="field-input w-full border border-[#E5E5E5] px-4 py-3 font-mono-data"
+              placeholder="Alex Rivera"
+              type="text"
+              autocomplete="name"
+            />
+            <p class="field-error text-error text-[10px] font-mono-data mt-1 hidden"></p>
+          </div>
+
+          <div class="form-field">
+            <label class="block font-label-sm uppercase text-[10px] mb-1">Work Email <span class="text-error">*</span></label>
+            <input
+              name="email"
+              class="field-input w-full border border-[#E5E5E5] px-4 py-3 font-mono-data"
+              placeholder="alex@company.com"
+              type="email"
+              autocomplete="email"
+            />
+            <p class="field-error text-error text-[10px] font-mono-data mt-1 hidden"></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-field">
+              <label class="block font-label-sm uppercase text-[10px] mb-1">Company Size</label>
+              <select name="size" class="field-input w-full border border-[#E5E5E5] px-4 py-3 font-mono-data bg-white">
+                <option value="">Select...</option>
+                <option value="1-10">1–10</option>
+                <option value="11-50">11–50</option>
+                <option value="51-200">51–200</option>
+                <option value="200+">200+</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="block font-label-sm uppercase text-[10px] mb-1">Current Goal</label>
+              <select name="goal" class="field-input w-full border border-[#E5E5E5] px-4 py-3 font-mono-data bg-white">
+                <option value="lead-gen">Lead Gen</option>
+                <option value="sales-automation">Sales Automation</option>
+                <option value="content-strategy">Content Strategy</option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            id="hero-form-btn"
+            class="btn-primary w-full bg-[#00FF41] text-black font-bold uppercase py-4 mt-4"
+          >
+            <span id="hero-form-btn-text">Book My Free Strategy Call</span>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div id="hero-form-success" class="form-success absolute inset-0 bg-white flex-col items-center justify-center p-8 text-center">
+          <span class="material-symbols-outlined text-primary text-6xl mb-4" style="font-variation-settings:'FILL' 1">check_circle</span>
+          <h4 class="font-headline-md text-xl uppercase mb-2">You're on the list!</h4>
+          <p class="text-secondary text-sm font-mono-data">We'll be in touch within 24 hours.</p>
+        </div>
+
+        <div class="mt-6 text-center text-[10px] font-mono-data text-gray-400 uppercase tracking-widest">
+          Limited availability · No spam · Cancel anytime
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ LOGO MARQUEE ═══════════════════════════════ -->
+  <div class="py-8 bg-[#0A0A0A] border-y border-[#262626] overflow-hidden">
+    <div class="marquee-track font-mono-data text-[#444] text-xs uppercase tracking-widest select-none">
+      <span class="mx-12">TechFlow</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">GrowthLab</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">Lumina</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">ArcVentures</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">NexusHQ</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">PulseRevenue</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">StackMate</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <!-- duplicate for seamless loop -->
+      <span class="mx-12">TechFlow</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">GrowthLab</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">Lumina</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">ArcVentures</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">NexusHQ</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">PulseRevenue</span><span class="mx-4 text-[#00FF41]">✦</span>
+      <span class="mx-12">StackMate</span><span class="mx-4 text-[#00FF41]">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ PROBLEM ═══════════════════════════════ -->
+  <section class="py-24 bg-surface border-t border-[#E5E5E5]">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter reveal">Why Most Growth Teams Are Stuck</h2>
+      <div class="grid md:grid-cols-3 gap-px bg-[#E5E5E5] border border-[#E5E5E5]">
+        <div class="bg-white p-12 card-lift reveal" style="transition-delay:0s">
+          <span class="material-symbols-outlined text-4xl mb-6 text-error block">cancel</span>
+          <h4 class="font-headline-md text-lg mb-4 uppercase">Lead Gen Burnout</h4>
+          <p class="text-secondary">Manual prospecting is slow, repetitive, and inconsistent. Reps spend 60% of their time on admin instead of selling.</p>
+        </div>
+        <div class="bg-white p-12 card-lift reveal" style="transition-delay:0.1s">
+          <span class="material-symbols-outlined text-4xl mb-6 text-error block">trending_down</span>
+          <h4 class="font-headline-md text-lg mb-4 uppercase">Marketing Lag</h4>
+          <p class="text-secondary">Campaigns take weeks to launch. By the time you find what works, the market has already shifted.</p>
+        </div>
+        <div class="bg-white p-12 card-lift reveal" style="transition-delay:0.2s">
+          <span class="material-symbols-outlined text-4xl mb-6 text-error block">noise_control_off</span>
+          <h4 class="font-headline-md text-lg mb-4 uppercase">Social Silence</h4>
+          <p class="text-secondary">Maintaining a consistent presence across LinkedIn, X, and Instagram is a full-time job you don't have time for.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ HOW IT WORKS ═══════════════════════════════ -->
+  <section class="py-16 bg-white" id="how-it-works">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="mb-12 reveal">
+        <h2 class="font-headline-lg text-4xl mb-4 uppercase tracking-tighter">How It Works</h2>
+        <div class="h-1 w-24 bg-primary"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-px bg-[#E5E5E5] border border-[#E5E5E5]">
+
+        <!-- Agent 01 -->
+        <div id="agent-lead-gen" class="bg-white p-10 card-lift reveal group" style="transition-delay:0s">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="font-mono-data text-[10px] text-primary border border-primary px-2 py-0.5 uppercase tracking-widest">AGENT_01</span>
+            <span class="material-symbols-outlined text-xl text-primary">person_search</span>
+          </div>
+          <h3 class="font-headline-lg text-xl mb-3 uppercase">Lead Generation</h3>
+          <p class="text-secondary text-sm mb-5">Identifies, researches, and qualifies high-intent prospects based on your ICP — automatically. No more manual searching.</p>
+          <ul class="space-y-2 font-label-sm text-xs uppercase">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              Hyper-personalized outreach
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              Multi-channel sequence management
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              CRM auto-sync and data cleaning
+            </li>
+          </ul>
+        </div>
+
+        <!-- Agent 02 -->
+        <div id="agent-marketing" class="bg-white p-10 card-lift reveal group" style="transition-delay:0.1s">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="font-mono-data text-[10px] text-primary border border-primary px-2 py-0.5 uppercase tracking-widest">AGENT_02</span>
+            <span class="material-symbols-outlined text-xl text-primary">campaign</span>
+          </div>
+          <h3 class="font-headline-lg text-xl mb-3 uppercase">Marketing Campaign</h3>
+          <p class="text-secondary text-sm mb-5">Writes, tests, and optimizes ad copy and email sequences in real-time. Learns what converts and doubles down on winning assets.</p>
+          <ul class="space-y-2 font-label-sm text-xs uppercase">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              A/B testing on autopilot
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              Dynamic creative optimization
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              Budget reallocation for ROI
+            </li>
+          </ul>
+        </div>
+
+        <!-- Agent 03 -->
+        <div id="agent-social" class="bg-white p-10 card-lift reveal group" style="transition-delay:0.2s">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="font-mono-data text-[10px] text-primary border border-primary px-2 py-0.5 uppercase tracking-widest">AGENT_03</span>
+            <span class="material-symbols-outlined text-xl text-primary">diversity_3</span>
+          </div>
+          <h3 class="font-headline-lg text-xl mb-3 uppercase">Social Media Content</h3>
+          <p class="text-secondary text-sm mb-5">Maintains brand voice across all platforms. Schedules, engages, and repurposes long-form content into viral-ready clips.</p>
+          <ul class="space-y-2 font-label-sm text-xs uppercase">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              24/7 engagement and replies
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              Trend-jacking and news response
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-size:14px;font-variation-settings:'FILL' 1">check_circle</span>
+              Automated content scheduling
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ STATS / SOCIAL PROOF ═══════════════════════════════ -->
+  <section class="py-24 bg-black text-white overflow-hidden" id="customers">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter text-[#00FF41] reveal">These Are Real Numbers</h2>
+
+      <div class="grid md:grid-cols-3 gap-12 mb-24 border-b border-[#262626] pb-24">
+        <div class="reveal" style="transition-delay:0s">
+          <div class="stat-num font-mono-data text-5xl text-[#00FF41] mb-2" data-target="450" data-suffix="%">0%</div>
+          <div class="font-label-sm uppercase text-xs tracking-widest text-gray-500">Avg Lead Volume Increase</div>
+        </div>
+        <div class="reveal" style="transition-delay:0.1s">
+          <div class="stat-num font-mono-data text-5xl text-[#00FF41] mb-2" data-target="12000" data-suffix="+" data-format="k">0+</div>
+          <div class="font-label-sm uppercase text-xs tracking-widest text-gray-500">Hours Reclaimed / Mo</div>
+        </div>
+        <div class="reveal" style="transition-delay:0.2s">
+          <div class="stat-num font-mono-data text-5xl text-[#00FF41] mb-2" data-target="2.4" data-suffix="M" data-prefix="$">$0M</div>
+          <div class="font-label-sm uppercase text-xs tracking-widest text-gray-500">Pipeline Generated in Q3</div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="testimonial-card border border-[#262626] p-8 reveal" style="transition-delay:0s">
+          <p class="text-lg italic mb-6">"Kirality Labs didn't just automate our emails; they automated our entire growth engine. We've seen a 3x jump in qualified meetings."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-[#00FF41] flex items-center justify-center font-bold text-black text-sm">SJ</div>
+            <div>
+              <div class="font-bold uppercase text-sm">Sarah Jenkins</div>
+              <div class="text-[10px] text-gray-500 font-mono-data">VP Sales @ TechFlow</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card border border-[#262626] p-8 reveal" style="transition-delay:0.12s">
+          <p class="text-lg italic mb-6">"The Social Agent is eerie. It writes exactly like I do, but works 10x faster. Our LinkedIn engagement is up 200%."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-[#00FF41] flex items-center justify-center font-bold text-black text-sm">MC</div>
+            <div>
+              <div class="font-bold uppercase text-sm">Marcus Chen</div>
+              <div class="text-[10px] text-gray-500 font-mono-data">Founder @ GrowthLab</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card border border-[#262626] p-8 reveal" style="transition-delay:0.24s">
+          <p class="text-lg italic mb-6">"I was skeptical about AI, but these agents are precise. They only bring in leads that actually fit our criteria."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-[#00FF41] flex items-center justify-center font-bold text-black text-sm">ER</div>
+            <div>
+              <div class="font-bold uppercase text-sm">Elena Rodriguez</div>
+              <div class="text-[10px] text-gray-500 font-mono-data">Marketing Director @ Lumina</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ USE CASES ═══════════════════════════════ -->
+  <section class="py-24 bg-surface" id="use-cases">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter text-center reveal">Built for Teams Like Yours</h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="usecase-card bg-white border border-[#E5E5E5] p-8 reveal" style="transition-delay:0s">
+          <span class="material-symbols-outlined text-primary text-2xl mb-4 block">rocket_launch</span>
+          <div class="font-headline-md text-lg mb-4 uppercase">Startups</div>
+          <p class="text-secondary text-sm">Scale your outbound without hiring a massive sales team.</p>
+        </div>
+        <div class="usecase-card bg-white border border-[#E5E5E5] p-8 reveal" style="transition-delay:0.08s">
+          <span class="material-symbols-outlined text-primary text-2xl mb-4 block">business</span>
+          <div class="font-headline-md text-lg mb-4 uppercase">SMEs</div>
+          <p class="text-secondary text-sm">Modernize your marketing stack with autonomous agents.</p>
+        </div>
+        <div class="usecase-card bg-white border border-[#E5E5E5] p-8 reveal" style="transition-delay:0.16s">
+          <span class="material-symbols-outlined text-primary text-2xl mb-4 block">storefront</span>
+          <div class="font-headline-md text-lg mb-4 uppercase">D2C Brands</div>
+          <p class="text-secondary text-sm">Manage social presence and content at scale.</p>
+        </div>
+        <div class="usecase-card bg-white border border-[#E5E5E5] p-8 reveal" style="transition-delay:0.24s">
+          <span class="material-symbols-outlined text-primary text-2xl mb-4 block">groups</span>
+          <div class="font-headline-md text-lg mb-4 uppercase">Sales Teams</div>
+          <p class="text-secondary text-sm">Free up your reps to focus on closing, not prospecting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ PROCESS ═══════════════════════════════ -->
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter reveal">No Long Contracts. Four Steps.</h2>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="reveal group relative p-8 border-l-2 border-black hover:border-[#00FF41] transition-colors" style="transition-delay:0s">
+          <div class="font-mono-data text-xs text-primary mb-2">01</div>
+          <h4 class="font-bold uppercase mb-2 group-hover:text-primary transition-colors">Discovery</h4>
+          <p class="text-sm text-secondary">We map your current revenue workflows and identify the highest-impact automation points.</p>
+        </div>
+        <div class="reveal group relative p-8 border-l-2 border-black hover:border-[#00FF41] transition-colors" style="transition-delay:0.1s">
+          <div class="font-mono-data text-xs text-primary mb-2">02</div>
+          <h4 class="font-bold uppercase mb-2 group-hover:text-primary transition-colors">Blueprint</h4>
+          <p class="text-sm text-secondary">Custom agent logic built around your ICP and existing stack. No cookie-cutter playbooks.</p>
+        </div>
+        <div class="reveal group relative p-8 border-l-2 border-black hover:border-[#00FF41] transition-colors" style="transition-delay:0.2s">
+          <div class="font-mono-data text-xs text-primary mb-2">03</div>
+          <h4 class="font-bold uppercase mb-2 group-hover:text-primary transition-colors">Launch</h4>
+          <p class="text-sm text-secondary">White-glove integration into your CRM, email, and social tools. Live in 7–14 days.</p>
+        </div>
+        <div class="reveal group relative p-8 border-l-2 border-black hover:border-[#00FF41] transition-colors" style="transition-delay:0.3s">
+          <div class="font-mono-data text-xs text-primary mb-2">04</div>
+          <h4 class="font-bold uppercase mb-2 group-hover:text-primary transition-colors">Operations</h4>
+          <p class="text-sm text-secondary">Ongoing optimization, reporting, and scaling as your business evolves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ STRATEGY CALL ═══════════════════════════════ -->
+  <section class="py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 px-3 py-1 bg-primary-container text-on-primary-container font-mono-data text-xs mb-8 uppercase tracking-widest border-l-4 border-primary">
+            <span class="pulse-dot" style="width:6px;height:6px;"></span>
+            Custom Quotes
+          </span>
+          <h2 class="font-headline-lg text-4xl md:text-5xl uppercase tracking-tighter mb-6 leading-none">Pricing Built Around Your Business</h2>
+          <p class="text-lg text-secondary mb-6">Every team we work with has a different stack, different goals, and a different definition of "done". A flat price list doesn't account for any of that.</p>
+          <p class="text-lg text-secondary mb-10">We get on a 30-minute call, understand exactly what you're trying to solve, and send you a scoped quote — no surprises, no upsells.</p>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+              <div>
+                <div class="font-label-sm font-bold uppercase text-sm">No obligation</div>
+                <div class="text-secondary text-sm">The call is free. You leave with clarity on what's possible, regardless of whether we work together.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+              <div>
+                <div class="font-label-sm font-bold uppercase text-sm">Scoped to your situation</div>
+                <div class="text-secondary text-sm">Your quote reflects your actual use case — the agents you need, the integrations you have, and the outcomes you're targeting.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+              <div>
+                <div class="font-label-sm font-bold uppercase text-sm">Fast turnaround</div>
+                <div class="text-secondary text-sm">We send your proposal within 48 hours of the call. No waiting weeks for a sales process to grind through.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal bg-white border-2 border-black p-12 text-center card-lift" style="transition-delay:0.15s">
+          <span class="material-symbols-outlined text-5xl text-primary mb-6 block" style="font-variation-settings:'FILL' 0">calendar_month</span>
+          <h3 class="font-headline-md text-2xl uppercase tracking-tighter mb-4">Book a 30-Min Strategy Call</h3>
+          <p class="text-secondary text-sm mb-10 max-w-xs mx-auto">Walk us through your revenue goals. We'll map out the right agent setup and send you a custom quote within 48 hours.</p>
+          <a
+            href="https://calendly.com/madshankarkel/catchup-with-madhav"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary inline-block w-full bg-[#00FF41] text-black font-bold uppercase py-4 font-label-sm"
+          ><span>Book a Demo</span></a>
+          <p class="font-mono-data text-[10px] text-gray-400 uppercase mt-6 tracking-widest">Free · 30 minutes · No commitment</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SECONDARY LEAD CAPTURE ═══════════════════════════════ -->
+  <section class="py-24 bg-[#0A0A0A] text-white" id="demo">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+      <div class="reveal-left">
+        <h2 class="font-headline-lg text-4xl mb-6 uppercase tracking-tighter">Ready to Stop Doing This Manually?</h2>
+        <p class="text-gray-400 text-lg mb-10">Chat with a Kirality specialist today and see exactly how many hours your team could save next month.</p>
+        <div class="space-y-6">
+          <a class="flex items-center gap-4 hover:text-[#00FF41] transition-colors group" href="https://wa.me/919810614297">
+            <span class="material-symbols-outlined group-hover:scale-110 transition-transform">chat</span>
+            <span class="font-mono-data">WhatsApp: +91-9810614297</span>
+          </a>
+          <a class="flex items-center gap-4 hover:text-[#00FF41] transition-colors group" href="mailto:hello@kirality.co">
+            <span class="material-symbols-outlined group-hover:scale-110 transition-transform">mail</span>
+            <span class="font-mono-data">hello@kirality.co</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal-right bg-white p-8 border border-[#262626] relative">
+        <h3 class="text-black font-headline-md text-xl mb-6 uppercase">Talk to a Specialist</h3>
+
+        <form id="contact-form" class="space-y-4" novalidate onsubmit="handleForm(event, 'contact-form')">
+          <div class="form-field">
+            <input
+              name="name"
+              class="field-input w-full border border-[#E5E5E5] text-black px-4 py-3 font-mono-data"
+              placeholder="Your Name"
+              type="text"
+              autocomplete="name"
+            />
+            <p class="field-error text-error text-[10px] font-mono-data mt-1 hidden"></p>
+          </div>
+          <div class="form-field">
+            <input
+              name="email"
+              class="field-input w-full border border-[#E5E5E5] text-black px-4 py-3 font-mono-data"
+              placeholder="Your Work Email"
+              type="email"
+              autocomplete="email"
+            />
+            <p class="field-error text-error text-[10px] font-mono-data mt-1 hidden"></p>
+          </div>
+          <div class="form-field">
+            <textarea
+              name="message"
+              class="field-input w-full border border-[#E5E5E5] text-black px-4 py-3 font-mono-data resize-none"
+              placeholder="Tell us about your current bottlenecks..."
+              rows="4"
+            ></textarea>
+            <p class="field-error text-error text-[10px] font-mono-data mt-1 hidden"></p>
+          </div>
+          <button
+            type="submit"
+            id="contact-form-btn"
+            class="btn-primary w-full bg-[#00FF41] text-black font-bold uppercase py-4"
+          >
+            <span id="contact-form-btn-text">Request Callback</span>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div id="contact-form-success" class="form-success absolute inset-0 bg-white flex-col items-center justify-center p-8 text-center">
+          <span class="material-symbols-outlined text-primary text-6xl mb-4" style="font-variation-settings:'FILL' 1">check_circle</span>
+          <h4 class="text-black font-headline-md text-xl uppercase mb-2">We'll be in touch!</h4>
+          <p class="text-secondary text-sm font-mono-data">Expect a call within 1 business day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FAQ ═══════════════════════════════ -->
+  <section class="py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-8">
+      <h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter text-center reveal">Common Questions</h2>
+      <div class="space-y-4">
+        <details class="group border border-[#E5E5E5] p-6 hover:border-black transition-colors reveal">
+          <summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+            Will the AI sound robotic?
+            <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+          </summary>
+          <div class="faq-body">
+            <p class="mt-4 text-secondary text-sm">No. We use proprietary fine-tuning based on your brand's existing content and voice to ensure every communication feels human and authentic.</p>
+          </div>
+        </details>
+        <details class="group border border-[#E5E5E5] p-6 hover:border-black transition-colors reveal" style="transition-delay:0.05s">
+          <summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+            How long does setup take?
+            <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+          </summary>
+          <div class="faq-body">
+            <p class="mt-4 text-secondary text-sm">A typical implementation takes between 7–14 days from initial blueprinting to full live operation.</p>
+          </div>
+        </details>
+        <details class="group border border-[#E5E5E5] p-6 hover:border-black transition-colors reveal" style="transition-delay:0.1s">
+          <summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+            Do I need a technical team?
+            <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+          </summary>
+          <div class="faq-body">
+            <p class="mt-4 text-secondary text-sm">Zero technical knowledge required. We handle all integrations and setup on your behalf.</p>
+          </div>
+        </details>
+        <details class="group border border-[#E5E5E5] p-6 hover:border-black transition-colors reveal" style="transition-delay:0.15s">
+          <summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+            Is my data secure?
+            <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+          </summary>
+          <div class="faq-body">
+            <p class="mt-4 text-secondary text-sm">We are SOC2 Type II compliant. Your data is encrypted and never used to train global models.</p>
+          </div>
+        </details>
+        <details class="group border border-[#E5E5E5] p-6 hover:border-black transition-colors reveal" style="transition-delay:0.2s">
+          <summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+            Can I cancel anytime?
+            <span class="material-symbols-outlined faq-icon text-primary">expand_more</span>
+          </summary>
+          <div class="faq-body">
+            <p class="mt-4 text-secondary text-sm">Yes. All plans are month-to-month with no cancellation fees. We'd rather earn your loyalty than lock you in.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FINAL CTA ═══════════════════════════════ -->
+  <section class="py-32 bg-primary-container relative overflow-hidden">
+    <!-- decorative lines -->
+    <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(90deg, #000 0, #000 1px, transparent 0, transparent 50%); background-size: 64px 64px;"></div>
+    <div class="max-w-4xl mx-auto px-8 text-center relative z-10 reveal">
+      <h2 class="font-headline-lg text-5xl md:text-6xl mb-12 uppercase tracking-tighter leading-none">Your Next Quarter Doesn't Have to Look Like the Last One</h2>
+      <div class="flex justify-center">
+        <a
+          href="https://calendly.com/madshankarkel/catchup-with-madhav"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary bg-black text-white px-10 py-5 font-bold uppercase text-lg"
+        ><span>Book a Demo</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="bg-white border-t border-[#E5E5E5] py-20">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
+        <div class="col-span-2">
+          <div class="font-bold text-lg text-black mb-6 flex items-center gap-2">
+            <span class="pulse-dot"></span> KIRALITY LABS
+          </div>
+          <p class="text-gray-500 text-xs max-w-xs mb-8">Building the future of revenue operations with autonomous agent technology.</p>
+          <div class="flex gap-4">
+            <a href="mailto:hello@kirality.co" class="material-symbols-outlined text-gray-400 hover:text-primary cursor-pointer transition-colors" title="Email">mail</a>
+          </div>
+        </div>
+        <div>
+          <h5 class="font-bold uppercase text-[10px] tracking-widest mb-6">Product</h5>
+          <ul class="space-y-4 text-xs font-mono-data text-gray-500 uppercase">
+            <li><a class="hover:text-primary transition-colors" href="#agent-lead-gen">Lead Gen</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#agent-marketing">Marketing</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#agent-social">Social</a></li>
+            <li><a class="hover:text-primary transition-colors" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer">Custom</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-bold uppercase text-[10px] tracking-widest mb-6">Company</h5>
+          <ul class="space-y-4 text-xs font-mono-data text-gray-500 uppercase">
+            <li><a class="hover:text-primary transition-colors" href="about.html">About</a></li>
+            <li><a class="hover:text-primary transition-colors" href="careers.html">Careers</a></li>
+            <li><a class="hover:text-primary transition-colors" href="mailto:hello@kirality.co">Contact</a></li>
+            <li><a class="hover:text-primary transition-colors" href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-bold uppercase text-[10px] tracking-widest mb-6">Resources</h5>
+          <ul class="space-y-4 text-xs font-mono-data text-gray-500 uppercase">
+            <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#">Docs</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#">Guides</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-[#E5E5E5] pt-12 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="font-mono-data text-[10px] text-gray-400 uppercase">© 2025 Kirality Labs. All rights reserved.</div>
+        <div class="flex gap-8 text-[10px] font-mono-data uppercase text-gray-400">
+          <a class="hover:text-black transition-colors" href="legal.html">Privacy Policy</a>
+          <a class="hover:text-black transition-colors" href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════ TOAST ═══════════════════════════════ -->
+  <div id="toast" class="bg-[#0A0A0A] text-white px-6 py-4 flex items-center gap-3 min-w-[260px] border-l-4 border-[#00FF41]">
+    <span class="material-symbols-outlined text-[#00FF41] text-xl" style="font-variation-settings:'FILL' 1">check_circle</span>
+    <span id="toast-msg" class="font-mono-data text-sm uppercase"></span>
+  </div>
+
+  <!-- ═══════════════════════════════ JAVASCRIPT ═══════════════════════════════ -->
+  <script>
+    /* ── Helpers ── */
+    const $ = (s, ctx = document) => ctx.querySelector(s);
+    const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
+
+    function showToast(msg) {
+      const t = $('#toast');
+      $('#toast-msg').textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3800);
+    }
+
+    function scrollToForm(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    /* ── Navbar scroll shadow ── */
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(0,0,0,0.08)' : '';
+    }, { passive: true });
+
+    /* ── Mobile menu ── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      const bars = $$('.hamburger-bar');
+      if (menuOpen) {
+        bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+        bars[1].style.opacity = '0';
+        bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        bars.forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+      }
+    });
+
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      $$('.hamburger-bar').forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+    }
+
+    /* ── Scroll-reveal ── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    $$('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+    /* ── Stat counters ── */
+    function animateCounter(el) {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      const fmt = el.dataset.format;
+      const duration = 1800;
+      const step = 16;
+      let current = 0;
+      const increment = target / (duration / step);
+
+      const timer = setInterval(() => {
+        current = Math.min(current + increment, target);
+        let display = fmt === 'k'
+          ? (current / 1000).toFixed(1).replace('.0', '') + 'k'
+          : Number.isInteger(target)
+            ? Math.round(current)
+            : current.toFixed(1);
+        el.textContent = prefix + display + suffix;
+        if (current >= target) clearInterval(timer);
+      }, step);
+    }
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(e.target);
+          statObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    $$('[data-target]').forEach(el => statObserver.observe(el));
+
+    /* ── Form validation ── */
+    const validators = {
+      name: (v) => v.trim().length >= 2 ? null : 'Please enter your full name.',
+      email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Enter a valid work email.',
+      message: (v) => v.trim().length >= 10 ? null : 'Please describe your bottlenecks (min 10 chars).',
+    };
+
+    function validateField(input) {
+      const name = input.name;
+      const val = input.value;
+      const errorEl = input.closest('.form-field')?.querySelector('.field-error');
+      const rule = validators[name];
+
+      if (!rule) return true;
+      const err = rule(val);
+
+      if (err) {
+        input.classList.add('error');
+        if (errorEl) { errorEl.textContent = err; errorEl.classList.remove('hidden'); }
+        return false;
+      } else {
+        input.classList.remove('error');
+        if (errorEl) { errorEl.textContent = ''; errorEl.classList.add('hidden'); }
+        return true;
+      }
+    }
+
+    /* Live validation on blur */
+    $$('.field-input').forEach(input => {
+      input.addEventListener('blur', () => validateField(input));
+      input.addEventListener('input', () => {
+        if (input.classList.contains('error')) validateField(input);
+      });
+    });
+
+    /* ── Form submission ── */
+    function handleForm(e, formId) {
+      e.preventDefault();
+      const form = document.getElementById(formId);
+      const inputs = $$('[name]', form);
+      let valid = true;
+
+      inputs.forEach(input => {
+        if (!validateField(input)) valid = false;
+      });
+
+      if (!valid) return;
+
+      /* Collect data */
+      const data = {};
+      inputs.forEach(input => { data[input.name] = input.value; });
+      data._formId = formId;
+      data._timestamp = new Date().toISOString();
+
+      /* ── Paste your Apps Script Web App URL here ── */
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6u_bm8QMr1OjK7dmNtQv8AG2DXafJqseobZGaDXWkXTKZOZNkzT9_c66X5n3XvJg/exec';
+
+      /* Keep a local backup in localStorage */
+      const key = 'kirality_submissions';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      existing.push(data);
+      localStorage.setItem(key, JSON.stringify(existing));
+
+      /* Show loading state */
+      const btn = document.getElementById(`${formId}-btn`);
+      const btnText = document.getElementById(`${formId}-btn-text`);
+      if (btn && btnText) {
+        btn.disabled = true;
+        btnText.innerHTML = '<span class="spinner"></span>';
+      }
+
+      function onSuccess() {
+        const successEl = document.getElementById(`${formId}-success`);
+        if (successEl) {
+          successEl.style.display = 'flex';
+          requestAnimationFrame(() => successEl.classList.add('show'));
+        }
+        showToast('Submitted — we\'ll be in touch!');
+        form.reset();
+        if (btn) btn.disabled = false;
+        if (btnText) btnText.textContent = btn.dataset.defaultText || 'Submit';
+      }
+
+      function onError(err) {
+        console.error('[Kirality Labs] Submission error:', err);
+        showToast('Something went wrong — try again.');
+        if (btn) btn.disabled = false;
+        if (btnText) btnText.textContent = btn.dataset.defaultText || 'Submit';
+      }
+
+      if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+        /* No URL yet — simulate success so the UI still works locally */
+        setTimeout(onSuccess, 1000);
+      } else {
+        /* POST to Google Apps Script — no-cors because Apps Script doesn't send CORS headers */
+        fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+          .then(onSuccess)
+          .catch(onError);
+      }
+    }
+
+    /* ── FAQ smooth height ── */
+    $$('details').forEach(detail => {
+      detail.addEventListener('toggle', () => {
+        /* already handled via CSS max-height transition */
+      });
+    });
+
+    /* ── Scroll to top on logo click ── */
+    document.querySelector('nav a[href="#"]')?.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

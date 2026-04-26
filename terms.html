@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Terms of Service | Kirality Labs</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-container": "#00ff41",
+            "on-primary-container": "#007117",
+            "primary": "#006e16",
+            "secondary": "#5f5e5e",
+            "surface": "#fbf9f8",
+            "background": "#fbf9f8",
+            "on-background": "#1b1c1c"
+          },
+          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+          fontFamily: {
+            "mono-data": ["monospace"],
+            "label-sm": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "headline-md": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #00FF41; transition: width 0.25s ease; }
+    .nav-link:hover::after { width: 100%; }
+    .btn-primary { position: relative; overflow: hidden; transition: transform 0.2s ease; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: #0A0A0A; transform: translateY(100%); transition: transform 0.25s ease; }
+    .btn-primary:hover::before { transform: translateY(0); }
+    .btn-primary:hover { color: #00FF41; }
+    .btn-primary span { position: relative; z-index: 1; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #00FF41; animation: pulse-dot 1.8s ease-in-out infinite; display: inline-block; }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    #mobile-menu.open { max-height: 280px; }
+    .prose h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; margin-top: 2.5rem; margin-bottom: 1rem; color: #1b1c1c; }
+    .prose p, .prose li { color: #5f5e5e; line-height: 1.75; font-size: 0.95rem; }
+    .prose ul { list-style: disc; padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem; }
+    .prose li { margin-bottom: 0.4rem; }
+    .prose a { color: #006e16; text-decoration: underline; }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-[#E5E5E5] flex justify-between items-center px-8 h-16">
+    <a href="index.html" class="text-xl font-bold tracking-tighter text-black font-headline-lg flex items-center gap-2">
+      <span class="pulse-dot"></span>
+      KIRALITY LABS
+    </a>
+    <div class="hidden md:flex gap-8 items-center font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#how-it-works">How It Works</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#use-cases">Use Cases</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#customers">Customers</a>
+      <a class="btn-primary bg-[#00FF41] text-black font-bold uppercase px-5 py-2.5 font-label-sm text-sm inline-block" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer"><span>Book a Demo</span></a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1" aria-label="Menu">
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="fixed top-16 w-full z-40 bg-white border-b border-[#E5E5E5] px-8">
+    <div class="py-6 flex flex-col gap-5 font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#how-it-works">How It Works</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#use-cases">Use Cases</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#customers">Customers</a>
+      <a class="btn-primary inline-block bg-[#00FF41] text-black font-bold uppercase px-4 py-2.5 font-label-sm text-sm" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer"><span>Book a Demo</span></a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="pt-40 pb-16 bg-white border-b border-[#E5E5E5]">
+    <div class="max-w-3xl mx-auto px-8">
+      <span class="inline-flex items-center gap-2 px-3 py-1 bg-primary-container text-on-primary-container font-mono-data text-xs mb-8 uppercase tracking-widest border-l-4 border-primary">
+        Legal
+      </span>
+      <h1 class="font-headline-lg text-5xl font-bold tracking-tighter mb-4 uppercase leading-none">Terms of Service</h1>
+      <p class="font-mono-data text-xs text-gray-400 uppercase tracking-widest">Effective Date: April 27, 2025</p>
+    </div>
+  </section>
+
+  <!-- TERMS BODY -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-3xl mx-auto px-8 prose">
+
+      <p>These Terms of Service ("Terms") govern your use of the Kirality Labs website and any services provided by Kirality Labs ("we", "our", or "us"). By accessing our website or engaging our services, you agree to be bound by these Terms. Please read them carefully.</p>
+
+      <h2>1. Services</h2>
+      <p>Kirality Labs provides bespoke AI agent design, deployment, and operational services for revenue teams. The specific scope, deliverables, timelines, and fees for any engagement are set out in a separate Statement of Work or service agreement entered into with each client. These Terms apply in addition to any such agreement.</p>
+
+      <h2>2. Eligibility</h2>
+      <p>You must be at least 18 years of age and have the legal authority to enter into a binding agreement on behalf of yourself or your organisation to use our services. By using our services, you represent and warrant that you meet these requirements.</p>
+
+      <h2>3. Acceptable Use</h2>
+      <p>You agree not to use our website or services to:</p>
+      <ul>
+        <li>Violate any applicable law, regulation, or third-party rights.</li>
+        <li>Transmit any content that is unlawful, defamatory, fraudulent, or harmful.</li>
+        <li>Attempt to gain unauthorised access to our systems or data.</li>
+        <li>Reverse-engineer, copy, or resell any proprietary components of our agent infrastructure without written consent.</li>
+        <li>Use our services in connection with deceptive, abusive, or spam outreach practices.</li>
+      </ul>
+
+      <h2>4. Intellectual Property</h2>
+      <p>All content on this website — including text, graphics, logos, and software — is the property of Kirality Labs and is protected by applicable intellectual property laws. Custom agent logic and workflows developed for a client engagement remain the property of Kirality Labs unless explicitly transferred in a signed agreement. Client-provided data, brand assets, and content remain the property of the client.</p>
+
+      <h2>5. Confidentiality</h2>
+      <p>Both parties agree to keep confidential any proprietary or sensitive information shared during an engagement. This includes business data, strategic plans, technical configurations, and pricing. This obligation survives the termination of any engagement.</p>
+
+      <h2>6. Payment</h2>
+      <p>Fees for services are specified in individual Statements of Work. Unless otherwise agreed, invoices are payable within 14 days of issue. Late payments may incur interest at the rate permitted by applicable law. We reserve the right to suspend services for accounts in arrears.</p>
+
+      <h2>7. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law, Kirality Labs shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of our services or website. Our total aggregate liability for any claim shall not exceed the amount paid by you for the relevant service in the three months preceding the claim.</p>
+
+      <h2>8. Disclaimers</h2>
+      <p>Our website and services are provided "as is" without warranties of any kind, express or implied. We do not guarantee that specific revenue outcomes will be achieved. AI-generated outputs are provided as tools to support your team and are not a substitute for human judgement.</p>
+
+      <h2>9. Termination</h2>
+      <p>Either party may terminate an engagement according to the notice period specified in the relevant Statement of Work. We reserve the right to immediately suspend or terminate access to our services if you breach these Terms.</p>
+
+      <h2>10. Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of India. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in New Delhi, India.</p>
+
+      <h2>11. Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. The "Effective Date" at the top of this page reflects the most recent revision. Continued use of our website or services after any update constitutes your acceptance of the revised Terms.</p>
+
+      <h2>12. Contact Us</h2>
+      <p>If you have questions about these Terms, please contact us at:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:hello@kirality.co">hello@kirality.co</a></li>
+        <li><strong>Company:</strong> Kirality Labs</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-[#E5E5E5] py-12">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="font-mono-data text-[10px] text-gray-400 uppercase">© 2025 Kirality Labs. All rights reserved.</div>
+      <div class="flex gap-8 text-[10px] font-mono-data uppercase text-gray-400">
+        <a class="hover:text-black transition-colors" href="legal.html">Privacy Policy</a>
+        <a class="hover:text-black transition-colors" href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      const bars = [...document.querySelectorAll('.hamburger-bar')];
+      if (menuOpen) {
+        bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+        bars[1].style.opacity = '0';
+        bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        bars.forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+      }
+    });
+  </script>
+</body>
+</html>

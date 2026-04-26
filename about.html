@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>About | Kirality Labs</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "brand-green": "#00FF41",
+            "brand-dark": "#0A0A0A",
+            "primary-container": "#00ff41",
+            "on-primary-container": "#007117",
+            "primary": "#006e16",
+            "secondary": "#5f5e5e",
+            "surface": "#fbf9f8",
+            "background": "#fbf9f8",
+            "on-background": "#1b1c1c",
+            "surface-container": "#efeded",
+            "on-surface": "#1b1c1c",
+            "outline-variant": "#b9ccb2",
+            "error": "#ba1a1a"
+          },
+          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+          fontFamily: {
+            "mono-data": ["monospace"],
+            "label-sm": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "headline-md": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #00FF41; transition: width 0.25s ease; }
+    .nav-link:hover::after { width: 100%; }
+    .btn-primary { position: relative; overflow: hidden; transition: transform 0.2s ease; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: #0A0A0A; transform: translateY(100%); transition: transform 0.25s ease; }
+    .btn-primary:hover::before { transform: translateY(0); }
+    .btn-primary:hover { color: #00FF41; }
+    .btn-primary span { position: relative; z-index: 1; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #00FF41; animation: pulse-dot 1.8s ease-in-out infinite; display: inline-block; }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    #mobile-menu.open { max-height: 280px; }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-[#E5E5E5] flex justify-between items-center px-8 h-16">
+    <a href="index.html" class="text-xl font-bold tracking-tighter text-black font-headline-lg flex items-center gap-2">
+      <span class="pulse-dot"></span>
+      KIRALITY LABS
+    </a>
+    <div class="hidden md:flex gap-8 items-center font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#how-it-works">How It Works</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#use-cases">Use Cases</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#customers">Customers</a>
+      <a class="btn-primary bg-[#00FF41] text-black font-bold uppercase px-5 py-2.5 font-label-sm text-sm inline-block" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer"><span>Book a Demo</span></a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1" aria-label="Menu">
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="fixed top-16 w-full z-40 bg-white border-b border-[#E5E5E5] px-8">
+    <div class="py-6 flex flex-col gap-5 font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#how-it-works">How It Works</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#use-cases">Use Cases</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#customers">Customers</a>
+      <a class="btn-primary inline-block bg-[#00FF41] text-black font-bold uppercase px-4 py-2.5 font-label-sm text-sm" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer"><span>Book a Demo</span></a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="pt-40 pb-24 bg-white border-b border-[#E5E5E5]">
+    <div class="max-w-4xl mx-auto px-8">
+      <span class="inline-flex items-center gap-2 px-3 py-1 bg-primary-container text-on-primary-container font-mono-data text-xs mb-8 uppercase tracking-widest border-l-4 border-primary">
+        <span class="pulse-dot" style="width:6px;height:6px;"></span>
+        Company
+      </span>
+      <h1 class="font-headline-lg text-5xl md:text-6xl font-bold tracking-tighter mb-8 uppercase leading-none">About Kirality Labs</h1>
+      <p class="text-xl text-secondary max-w-2xl">We build autonomous AI agents for revenue teams — so your people can stop doing repetitive work and start doing meaningful work.</p>
+    </div>
+  </section>
+
+  <!-- DEFINITION -->
+  <section class="py-24 bg-surface">
+    <div class="max-w-4xl mx-auto px-8 space-y-16">
+
+      <div class="grid md:grid-cols-3 gap-px bg-[#E5E5E5] border border-[#E5E5E5]">
+        <div class="bg-white p-10 col-span-3">
+          <h2 class="font-headline-lg text-3xl uppercase tracking-tighter mb-6">What We Are</h2>
+          <p class="text-secondary text-lg leading-relaxed max-w-3xl">
+            Kirality Labs is an AI-native services company. We design, deploy, and operate custom AI agent systems that automate the highest-friction points in sales, marketing, and social media — giving revenue teams the leverage they need to grow without scaling headcount.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-px bg-[#E5E5E5] border border-[#E5E5E5]">
+        <div class="bg-white p-10">
+          <div class="font-mono-data text-xs text-primary mb-3 uppercase tracking-widest">01</div>
+          <h4 class="font-headline-md text-lg uppercase mb-4">Service-First</h4>
+          <p class="text-secondary text-sm">We're not a SaaS tool. We build bespoke agent infrastructure around your existing workflows, ICP, and tech stack — then operate it on your behalf.</p>
+        </div>
+        <div class="bg-white p-10">
+          <div class="font-mono-data text-xs text-primary mb-3 uppercase tracking-widest">02</div>
+          <h4 class="font-headline-md text-lg uppercase mb-4">Outcome-Focused</h4>
+          <p class="text-secondary text-sm">Every engagement is scoped around a measurable revenue outcome — more qualified leads, faster campaign cycles, or consistent brand presence across channels.</p>
+        </div>
+        <div class="bg-white p-10">
+          <div class="font-mono-data text-xs text-primary mb-3 uppercase tracking-widest">03</div>
+          <h4 class="font-headline-md text-lg uppercase mb-4">Responsible AI</h4>
+          <p class="text-secondary text-sm">We are SOC2 Type II compliant. Your data stays yours — never used to train global models, always encrypted at rest and in transit.</p>
+        </div>
+      </div>
+
+      <div class="border-l-4 border-[#00FF41] pl-8 py-2">
+        <p class="font-headline-md text-2xl uppercase tracking-tighter leading-snug max-w-2xl">
+          "The future of revenue operations is not more reps — it's smarter systems working alongside your best people."
+        </p>
+        <p class="font-mono-data text-xs text-secondary mt-4 uppercase tracking-widest">— Kirality Labs</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 bg-[#0A0A0A] text-white">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h2 class="font-headline-lg text-4xl uppercase tracking-tighter mb-6">Ready to Work Together?</h2>
+      <p class="text-gray-400 mb-10">Talk to a specialist and find out how Kirality Labs can accelerate your revenue team.</p>
+      <a href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block bg-[#00FF41] text-black px-10 py-4 font-bold uppercase font-label-sm"><span>Book a Demo</span></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-[#E5E5E5] py-12">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="font-mono-data text-[10px] text-gray-400 uppercase">© 2025 Kirality Labs. All rights reserved.</div>
+      <div class="flex gap-8 text-[10px] font-mono-data uppercase text-gray-400">
+        <a class="hover:text-black transition-colors" href="legal.html">Privacy Policy</a>
+        <a class="hover:text-black transition-colors" href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      const bars = [...document.querySelectorAll('.hamburger-bar')];
+      if (menuOpen) {
+        bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+        bars[1].style.opacity = '0';
+        bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        bars.forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+      }
+    });
+  </script>
+</body>
+</html>

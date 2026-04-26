@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Privacy Policy | Kirality Labs</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-container": "#00ff41",
+            "on-primary-container": "#007117",
+            "primary": "#006e16",
+            "secondary": "#5f5e5e",
+            "surface": "#fbf9f8",
+            "background": "#fbf9f8",
+            "on-background": "#1b1c1c"
+          },
+          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+          fontFamily: {
+            "mono-data": ["monospace"],
+            "label-sm": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "headline-md": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #00FF41; transition: width 0.25s ease; }
+    .nav-link:hover::after { width: 100%; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #00FF41; animation: pulse-dot 1.8s ease-in-out infinite; display: inline-block; }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    #mobile-menu.open { max-height: 280px; }
+    .prose h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; margin-top: 2.5rem; margin-bottom: 1rem; color: #1b1c1c; }
+    .prose p, .prose li { color: #5f5e5e; line-height: 1.75; font-size: 0.95rem; }
+    .prose ul { list-style: disc; padding-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem; }
+    .prose li { margin-bottom: 0.4rem; }
+    .prose a { color: #006e16; text-decoration: underline; }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-[#E5E5E5] flex justify-between items-center px-8 h-16">
+    <a href="index.html" class="text-xl font-bold tracking-tighter text-black font-headline-lg flex items-center gap-2">
+      <span class="pulse-dot"></span>
+      KIRALITY LABS
+    </a>
+    <div class="hidden md:flex gap-8 items-center font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#how-it-works">How It Works</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#use-cases">Use Cases</a>
+      <a class="nav-link text-black hover:text-[#00FF41] transition-colors" href="index.html#customers">Customers</a>
+      <a class="btn-primary bg-[#00FF41] text-black font-bold uppercase px-5 py-2.5 font-label-sm text-sm inline-block" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer"><span>Book a Demo</span></a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1" aria-label="Menu">
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-bar block w-6 h-0.5 bg-black transition-all duration-300"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="fixed top-16 w-full z-40 bg-white border-b border-[#E5E5E5] px-8">
+    <div class="py-6 flex flex-col gap-5 font-label-sm uppercase tracking-tighter font-medium text-sm">
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#how-it-works">How It Works</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#use-cases">Use Cases</a>
+      <a class="text-black hover:text-[#00FF41] transition-colors" href="index.html#customers">Customers</a>
+      <a class="btn-primary inline-block bg-[#00FF41] text-black font-bold uppercase px-4 py-2.5 font-label-sm text-sm" href="https://calendly.com/madshankarkel/catchup-with-madhav" target="_blank" rel="noopener noreferrer"><span>Book a Demo</span></a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="pt-40 pb-16 bg-white border-b border-[#E5E5E5]">
+    <div class="max-w-3xl mx-auto px-8">
+      <span class="inline-flex items-center gap-2 px-3 py-1 bg-primary-container text-on-primary-container font-mono-data text-xs mb-8 uppercase tracking-widest border-l-4 border-primary">
+        Legal
+      </span>
+      <h1 class="font-headline-lg text-5xl font-bold tracking-tighter mb-4 uppercase leading-none">Privacy Policy</h1>
+      <p class="font-mono-data text-xs text-gray-400 uppercase tracking-widest">Effective Date: April 27, 2025</p>
+    </div>
+  </section>
+
+  <!-- POLICY BODY -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-3xl mx-auto px-8 prose">
+
+      <p>Kirality Labs ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you visit our website or engage with our services. Please read this policy carefully.</p>
+
+      <h2>1. Information We Collect</h2>
+      <p>We may collect the following types of information:</p>
+      <ul>
+        <li><strong>Contact information</strong> — name, work email address, company name, and company size provided via our inquiry forms.</li>
+        <li><strong>Usage data</strong> — browser type, IP address, pages visited, and time spent on the site, collected automatically via standard server logs and analytics tools.</li>
+        <li><strong>Communications</strong> — any information you provide when you contact us by email or through our contact form.</li>
+      </ul>
+
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Respond to your inquiries and schedule strategy calls or demos.</li>
+        <li>Provide, operate, and improve our services.</li>
+        <li>Send service-related communications (not marketing unless you have opted in).</li>
+        <li>Comply with applicable legal obligations.</li>
+      </ul>
+
+      <h2>3. How We Share Your Information</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. We may share information with:</p>
+      <ul>
+        <li><strong>Service providers</strong> — trusted vendors who assist us in operating our website or delivering our services (e.g., Google Workspace, CRM tools), bound by confidentiality obligations.</li>
+        <li><strong>Legal authorities</strong> — when required to comply with a legal obligation or protect the rights and safety of Kirality Labs and its users.</li>
+      </ul>
+
+      <h2>4. Data Retention</h2>
+      <p>We retain your personal information only for as long as necessary to fulfil the purposes described in this policy, or as required by law. Inquiry data is retained for a maximum of 24 months from the date of collection, after which it is deleted or anonymised.</p>
+
+      <h2>5. Data Security</h2>
+      <p>We implement industry-standard technical and organisational measures to protect your data. Kirality Labs is SOC2 Type II compliant. Your data is encrypted at rest and in transit and is never used to train global AI models.</p>
+
+      <h2>6. Your Rights</h2>
+      <p>Depending on your jurisdiction, you may have the right to:</p>
+      <ul>
+        <li>Access the personal data we hold about you.</li>
+        <li>Request correction of inaccurate data.</li>
+        <li>Request deletion of your data.</li>
+        <li>Object to or restrict processing of your data.</li>
+        <li>Lodge a complaint with a supervisory authority.</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:hello@kirality.co">hello@kirality.co</a>. We will respond within 30 days.</p>
+
+      <h2>7. Cookies</h2>
+      <p>Our website may use cookies to enhance your browsing experience. These are session-level or functional cookies only — we do not use third-party advertising cookies. You can disable cookies in your browser settings at any time; however, some functionality may be affected.</p>
+
+      <h2>8. Third-Party Links</h2>
+      <p>Our website may contain links to third-party sites. We are not responsible for the privacy practices of those sites and encourage you to review their privacy policies independently.</p>
+
+      <h2>9. Children's Privacy</h2>
+      <p>Our services are not directed at individuals under the age of 16. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us so we can delete it.</p>
+
+      <h2>10. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. The "Effective Date" at the top of this page reflects the date of the most recent revision. We encourage you to review this policy periodically. Continued use of our website after any update constitutes your acceptance of the revised policy.</p>
+
+      <h2>11. Contact Us</h2>
+      <p>If you have questions or concerns about this Privacy Policy, please contact us at:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:hello@kirality.co">hello@kirality.co</a></li>
+        <li><strong>Company:</strong> Kirality Labs</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-[#E5E5E5] py-12">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="font-mono-data text-[10px] text-gray-400 uppercase">© 2025 Kirality Labs. All rights reserved.</div>
+      <div class="flex gap-8 text-[10px] font-mono-data uppercase text-gray-400">
+        <a class="hover:text-black transition-colors" href="legal.html">Privacy Policy</a>
+        <a class="hover:text-black transition-colors" href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      const bars = [...document.querySelectorAll('.hamburger-bar')];
+      if (menuOpen) {
+        bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+        bars[1].style.opacity = '0';
+        bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+      } else {
+        bars.forEach(b => { b.style.transform = ''; b.style.opacity = ''; });
+      }
+    });
+  </script>
+</body>
+</html>

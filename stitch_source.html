@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kirality Labs | AI Agents for Revenue Teams</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#6b7c65",
+                      "on-primary-fixed": "#002203",
+                      "surface-container": "#efeded",
+                      "on-secondary-container": "#656464",
+                      "outline-variant": "#b9ccb2",
+                      "primary-container": "#00ff41",
+                      "on-background": "#1b1c1c",
+                      "inverse-on-surface": "#f2f0f0",
+                      "surface-tint": "#006e16",
+                      "secondary-fixed-dim": "#c9c6c5",
+                      "on-primary-container": "#007117",
+                      "tertiary-container": "#dddddd",
+                      "secondary-fixed": "#e5e2e1",
+                      "surface-dim": "#dbdad9",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#00530e",
+                      "surface": "#fbf9f8",
+                      "background": "#fbf9f8",
+                      "on-surface": "#1b1c1c",
+                      "surface-container-low": "#f5f3f3",
+                      "on-surface-variant": "#3b4b37",
+                      "primary": "#006e16",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "surface-variant": "#e4e2e2",
+                      "surface-container-high": "#e9e8e7",
+                      "surface-container-highest": "#e4e2e2",
+                      "secondary": "#5f5e5e",
+                      "on-secondary-fixed-variant": "#474646",
+                      "inverse-surface": "#303031",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "primary-fixed": "#72ff70",
+                      "surface-bright": "#fbf9f8",
+                      "primary-fixed-dim": "#00e639",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#e2e2e2",
+                      "inverse-primary": "#00e639",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-tertiary-container": "#606161",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "error": "#ba1a1a",
+                      "tertiary": "#5d5f5f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "0px",
+                      "xl": "0px",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin": "24px",
+                      "container-max": "1440px",
+                      "unit": "4px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "mono-data": ["monospace"],
+                      "label-sm": ["Space Grotesk"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Space Grotesk"],
+                      "headline-lg": ["Space Grotesk"]
+              }
+            }
+          }
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.hero-pattern {
+    background-image: linear-gradient(rgba(251, 249, 248, 0.9), rgba(251, 249, 248, 0.9)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuDoprvbz3P-QcmaeB3OhFna9OMEKJO5whjSZMIF8dlvT0BxkXWyeKXekoFNw5zGDxf3muHlKMX6XxGXeeWvdu14GVbbV57GDUMO2G5o6xixOSojRQ9Y3HfGqYVFWVvznP1i1vzEINgRCr3jzJeCYVZuxqbXhefe_7bS-PFebktlgi2z-6RV9Yb1bDTFpjX2JRG6IxdCl2MFw45i-waChhk3j17IEaUIpu_gcZwdrxr2_KvV9KQBwV1QhRWgmFFJG0M1fEJnDSm-);
+    background-size: cover;
+    background-position: center
+    }
+.hud-border {
+    border: 1px solid #E5E5E5
+    }
+.hud-border-primary {
+    border: 1px solid #00FF41
+    }
+.hud-border-thick {
+    border: 2px solid #0A0A0A
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- 1. NAVBAR -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-[#E5E5E5] dark:border-[#262626] flex justify-between items-center px-8 h-16">
+<div class="text-xl font-bold tracking-tighter text-black dark:text-white font-headline-lg">KIRALITY LABS</div>
+<div class="hidden md:flex gap-8 items-center font-label-sm uppercase tracking-tighter font-medium text-sm">
+<a class="text-black dark:text-white hover:text-[#00FF41] transition-colors" href="#how-it-works">How It Works</a>
+<a class="text-black dark:text-white hover:text-[#00FF41] transition-colors" href="#use-cases">Use Cases</a>
+<a class="text-black dark:text-white hover:text-[#00FF41] transition-colors" href="#pricing">Pricing</a>
+<a class="text-black dark:text-white hover:text-[#00FF41] transition-colors" href="#customers">Customers</a>
+<a class="text-black dark:text-white hover:text-[#00FF41] transition-colors" href="#demo">Book a Demo</a>
+</div>
+<button class="bg-[#00FF41] text-[#0A0A0A] font-label-sm uppercase px-6 py-2 font-bold transition-all duration-200 hover:scale-95 active:scale-90">Start Free</button>
+</nav>
+<!-- 2. HERO -->
+<section class="relative pt-32 pb-24 hero-pattern min-h-screen flex items-center" data-alt="abstract neural waveform mesh with pulsing green nodes and glowing data pathways on a clean white background">
+<div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="inline-block px-3 py-1 bg-primary-container text-on-primary-container font-mono-data text-xs mb-6 uppercase tracking-widest border-l-4 border-primary">AI Agents Built for Revenue Teams</span>
+<h1 class="font-headline-lg text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-none uppercase">Your Next 100 Leads Won't Come From Cold Calls...</h1>
+<p class="text-xl text-secondary mb-10 max-w-lg">Scale your outreach, marketing, and social presence with autonomous AI agents that work 24/7 to hit your revenue targets.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary text-4xl">automation</span>
+<span class="material-symbols-outlined text-primary text-4xl">trending_up</span>
+<span class="material-symbols-outlined text-primary text-4xl">precision_manufacturing</span>
+</div>
+</div>
+<div class="bg-white border-2 border-black p-8 relative">
+<h3 class="font-headline-md text-xl mb-6 uppercase">See What an Agent Can Do for Your Business</h3>
+<form class="space-y-4">
+<div>
+<label class="block font-label-sm uppercase text-[10px] mb-1">Full Name</label>
+<input class="w-full border border-[#E5E5E5] px-4 py-3 focus:border-2 focus:border-[#00FF41] outline-none font-mono-data" placeholder="Alex Rivera" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm uppercase text-[10px] mb-1">Work Email</label>
+<input class="w-full border border-[#E5E5E5] px-4 py-3 focus:border-2 focus:border-[#00FF41] outline-none font-mono-data" placeholder="alex@company.com" type="email"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm uppercase text-[10px] mb-1">Company Size</label>
+<select class="w-full border border-[#E5E5E5] px-4 py-3 focus:border-2 focus:border-[#00FF41] outline-none font-mono-data">
+<option>1-10</option>
+<option>11-50</option>
+<option>51-200</option>
+<option>200+</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm uppercase text-[10px] mb-1">Current Goal</label>
+<select class="w-full border border-[#E5E5E5] px-4 py-3 focus:border-2 focus:border-[#00FF41] outline-none font-mono-data">
+<option>Lead Gen</option>
+<option>Sales Automation</option>
+<option>Content Strategy</option>
+</select>
+</div>
+</div>
+<button class="w-full bg-[#00FF41] text-black font-bold uppercase py-4 mt-4 hover:bg-black hover:text-[#00FF41] transition-colors">Book My Free Strategy Call</button>
+</form>
+<div class="mt-6 text-center text-[10px] font-mono-data text-gray-400 uppercase tracking-widest">Limited availability for October cohorts</div>
+</div>
+</div>
+</section>
+<!-- 3. PROBLEM -->
+<section class="py-24 bg-surface border-t border-[#E5E5E5]">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter">Why Most Growth Teams Are Stuck</h2>
+<div class="grid md:grid-cols-3 gap-px bg-[#E5E5E5] border border-[#E5E5E5]">
+<div class="bg-white p-12">
+<span class="material-symbols-outlined text-4xl mb-6 text-error">cancel</span>
+<h4 class="font-headline-md text-lg mb-4 uppercase">Lead Gen Burnout</h4>
+<p class="text-secondary">Manual prospecting is slow, repetitive, and inconsistent. Reps spend 60% of their time on admin instead of selling.</p>
+</div>
+<div class="bg-white p-12">
+<span class="material-symbols-outlined text-4xl mb-6 text-error">trending_down</span>
+<h4 class="font-headline-md text-lg mb-4 uppercase">Marketing Lag</h4>
+<p class="text-secondary">Campaigns take weeks to launch. By the time you find what works, the market has already shifted.</p>
+</div>
+<div class="bg-white p-12">
+<span class="material-symbols-outlined text-4xl mb-6 text-error">noise_control_off</span>
+<h4 class="font-headline-md text-lg mb-4 uppercase">Social Silence</h4>
+<p class="text-secondary">Maintaining a consistent presence across LinkedIn, X, and Instagram is a full-time job you don't have time for.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. SOLUTION -->
+<section class="py-24 bg-white" id="how-it-works">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-20">
+<h2 class="font-headline-lg text-4xl mb-4 uppercase tracking-tighter">How It Works</h2>
+<div class="h-1 w-24 bg-primary"></div>
+</div>
+<div class="space-y-24">
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div>
+<div class="text-primary font-mono-data mb-4">AGENT_01</div>
+<h3 class="font-headline-lg text-3xl mb-6 uppercase">Lead Generation Agent</h3>
+<p class="text-lg text-secondary mb-8">Automatically identifies, researches, and qualifies high-intent prospects based on your Ideal Customer Profile. No more manual searching.</p>
+<ul class="space-y-4 font-label-sm uppercase">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Hyper-personalized outreach</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Multi-channel sequence management</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> CRM auto-sync and data cleaning</li>
+</ul>
+</div>
+<div class="border-2 border-black bg-surface p-4">
+<img class="w-full grayscale brightness-90 hover:grayscale-0 transition-all duration-500" data-alt="professional data dashboard showing lead generation metrics and growth charts in a high-tech terminal interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFth5HCMykLt3w1zMZZuQ2dLkCUpzsr203ZZKYbQOvSdLrXXdoU5ILQ5dbZMsGe4Ca5orZe8YagRpMHi5PZdDrU6DFmXiX0-3X3dw0gYvBGBVm6zL97a7SzJNs0KKZyl-CiScgN8uisceQfgVZai56YqLp4F2pFo9ypoDUriMiNecmGtFe2cpOe_q-yHA4jSkUvKgRQ327y07WQli2kYIV3MU14pEm1v4C3t1Vj1XbOGIuOyNu31imrxdUP8Ug2gkwZ_LGA49V"/>
+</div>
+</div>
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1 border-2 border-black bg-surface p-4">
+<img class="w-full grayscale brightness-90 hover:grayscale-0 transition-all duration-500" data-alt="creative workspace with multiple monitors displaying marketing campaign analytics and visual design assets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPLrfVn_uQ3iHDILdVZIf7GR_Zbcm-DeAchuPxsP3RwsTqXVaVbvFAiP3qNFILGIg2XGT7DBNCjHw4Q2H2xCvZ_CONk2ZgM3V6ESTNDyhGZCzSXVYCDUZeYch79qxWOLC-hYJlX6KvkQFvq_LS7iaB3wDpLCgxufWvasicHUXL4YyRofB5uJ-hndkIB220q9ZXwhkyzs0v8cgFb5q9N-XID_F2wiFfbSw2NGMMMPeRv5ijEIi9q_jifTaoUu4WN-hNzkwWkw4n"/>
+</div>
+<div class="order-1 md:order-2">
+<div class="text-primary font-mono-data mb-4">AGENT_02</div>
+<h3 class="font-headline-lg text-3xl mb-6 uppercase">Marketing Campaign Agent</h3>
+<p class="text-lg text-secondary mb-8">Writes, tests, and optimizes ad copy and email sequences in real-time. It learns what converts and doubles down on winning assets.</p>
+<ul class="space-y-4 font-label-sm uppercase">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> A/B testing on autopilot</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Dynamic creative optimization</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Budget reallocation for ROI</li>
+</ul>
+</div>
+</div>
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div>
+<div class="text-primary font-mono-data mb-4">AGENT_03</div>
+<h3 class="font-headline-lg text-3xl mb-6 uppercase">Social Media Content Agent</h3>
+<p class="text-lg text-secondary mb-8">Maintains your brand voice across all platforms. Schedules, engages, and repurposes long-form content into viral-ready clips.</p>
+<ul class="space-y-4 font-label-sm uppercase">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 24/7 engagement and replies</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Trend-jacking and news response</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Automated content scheduling</li>
+</ul>
+</div>
+<div class="border-2 border-black bg-surface p-4">
+<img class="w-full grayscale brightness-90 hover:grayscale-0 transition-all duration-500" data-alt="vibrant social media grid on a mobile device showing high engagement rates and modern aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsmcpiHZfOGgT_dRNI_SoPvAyjH49NChSVHRXdaJk1C0UZaeBLYGCmQ8PQn1VEo6EjzMupx8pzF_y2fa75lWYRne0FcxMn3b9uj5nNRoBnxCbn3t_H4x7BwP2LdKlxrUFKTE6vEkid6NhYlolgqZDdfUGOFutp2dkhip1W5K0csrr0l48XEsYPYZB3HYT--sPab-iBeikpXPRyX40HhcW3JgZ20EAj8Mmhqko_eDtC3CvzxJF61IksGOwYxSeLTxCmcC4pDpZu"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. SOCIAL PROOF -->
+<section class="py-24 bg-black text-white overflow-hidden">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter text-[#00FF41]">These Are Real Numbers</h2>
+<div class="grid md:grid-cols-3 gap-12 mb-24 border-b border-[#262626] pb-24">
+<div>
+<div class="font-mono-data text-5xl text-[#00FF41] mb-2">450%</div>
+<div class="font-label-sm uppercase text-xs tracking-widest text-gray-500">Avg Lead Volume Increase</div>
+</div>
+<div>
+<div class="font-mono-data text-5xl text-[#00FF41] mb-2">12k+</div>
+<div class="font-label-sm uppercase text-xs tracking-widest text-gray-500">Hours Reclaimed / Mo</div>
+</div>
+<div>
+<div class="font-mono-data text-5xl text-[#00FF41] mb-2">$2.4M</div>
+<div class="font-label-sm uppercase text-xs tracking-widest text-gray-500">Pipeline Generated in Q3</div>
+</div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="border border-[#262626] p-8">
+<p class="text-lg italic mb-6">"Kirality Labs didn't just automate our emails; they automated our entire growth engine. We've seen a 3x jump in qualified meetings."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-[#262626]"></div>
+<div>
+<div class="font-bold uppercase text-sm">Sarah Jenkins</div>
+<div class="text-[10px] text-gray-500 font-mono-data">VP Sales @ TechFlow</div>
+</div>
+</div>
+</div>
+<div class="border border-[#262626] p-8">
+<p class="text-lg italic mb-6">"The Social Agent is eerie. It writes exactly like I do, but works 10x faster. Our LinkedIn engagement is up 200%."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-[#262626]"></div>
+<div>
+<div class="font-bold uppercase text-sm">Marcus Chen</div>
+<div class="text-[10px] text-gray-500 font-mono-data">Founder @ GrowthLab</div>
+</div>
+</div>
+</div>
+<div class="border border-[#262626] p-8">
+<p class="text-lg italic mb-6">"I was skeptical about AI, but these agents are precise. They only bring in leads that actually fit our criteria."</p>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-[#262626]"></div>
+<div>
+<div class="font-bold uppercase text-sm">Elena Rodriguez</div>
+<div class="text-[10px] text-gray-500 font-mono-data">Marketing Director @ Lumina</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. USE CASES -->
+<section class="py-24 bg-surface" id="use-cases">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter text-center">Built for Teams Like Yours</h2>
+<div class="grid md:grid-cols-4 gap-8">
+<div class="bg-white border border-[#E5E5E5] p-8 hover:border-black transition-colors">
+<div class="font-headline-md text-lg mb-4 uppercase">Startups</div>
+<p class="text-secondary text-sm">Scale your outbound without hiring a massive sales team.</p>
+</div>
+<div class="bg-white border border-[#E5E5E5] p-8 hover:border-black transition-colors">
+<div class="font-headline-md text-lg mb-4 uppercase">SMEs</div>
+<p class="text-secondary text-sm">Modernize your marketing stack with autonomous agents.</p>
+</div>
+<div class="bg-white border border-[#E5E5E5] p-8 hover:border-black transition-colors">
+<div class="font-headline-md text-lg mb-4 uppercase">D2C Brands</div>
+<p class="text-secondary text-sm">Manage social presence and content at scale.</p>
+</div>
+<div class="bg-white border border-[#E5E5E5] p-8 hover:border-black transition-colors">
+<div class="font-headline-md text-lg mb-4 uppercase">Sales Teams</div>
+<p class="text-secondary text-sm">Free up your reps to focus on closing, not prospecting.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. PROCESS -->
+<section class="py-24 bg-white">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter">No Long Contracts</h2>
+<div class="grid md:grid-cols-4 gap-4">
+<div class="relative p-8 border-l-2 border-black">
+<div class="font-mono-data text-xs text-primary mb-2">01</div>
+<h4 class="font-bold uppercase mb-2">Discovery</h4>
+<p class="text-sm text-secondary">We map your current revenue workflows.</p>
+</div>
+<div class="relative p-8 border-l-2 border-black">
+<div class="font-mono-data text-xs text-primary mb-2">02</div>
+<h4 class="font-bold uppercase mb-2">Blueprint</h4>
+<p class="text-sm text-secondary">Custom agent logic built for your ICP.</p>
+</div>
+<div class="relative p-8 border-l-2 border-black">
+<div class="font-mono-data text-xs text-primary mb-2">03</div>
+<h4 class="font-bold uppercase mb-2">Launch</h4>
+<p class="text-sm text-secondary">Integration into your CRM and tools.</p>
+</div>
+<div class="relative p-8 border-l-2 border-black">
+<div class="font-mono-data text-xs text-primary mb-2">04</div>
+<h4 class="font-bold uppercase mb-2">Operations</h4>
+<p class="text-sm text-secondary">Ongoing optimization and scaling.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. PRICING -->
+<section class="py-24 bg-surface" id="pricing">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter text-center">Transparent Pricing</h2>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Starter -->
+<div class="bg-white border border-[#E5E5E5] p-10">
+<div class="font-mono-data text-xs mb-4 uppercase">Starter</div>
+<div class="text-4xl font-bold mb-6">$999<span class="text-sm font-normal text-gray-400">/mo</span></div>
+<ul class="space-y-4 mb-10 text-sm">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> 1 AI Agent</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> 500 Qualified Leads</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> Email Integration</li>
+</ul>
+<button class="w-full border border-black py-3 font-bold uppercase hover:bg-black hover:text-white transition-colors">Choose Starter</button>
+</div>
+<!-- Growth -->
+<div class="bg-white border-2 border-[#00FF41] p-10 relative">
+<div class="absolute top-0 right-0 bg-[#00FF41] text-black px-3 py-1 font-mono-data text-[10px] uppercase">Most Popular</div>
+<div class="font-mono-data text-xs mb-4 uppercase text-[#00FF41]">Growth</div>
+<div class="text-4xl font-bold mb-6">$2,499<span class="text-sm font-normal text-gray-400">/mo</span></div>
+<ul class="space-y-4 mb-10 text-sm">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> 3 AI Agents</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> 2,000 Qualified Leads</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> CRM + Social Integration</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> Weekly Strategy Calls</li>
+</ul>
+<button class="w-full bg-[#00FF41] text-black py-3 font-bold uppercase transition-colors">Choose Growth</button>
+</div>
+<!-- Scale -->
+<div class="bg-white border border-[#E5E5E5] p-10">
+<div class="font-mono-data text-xs mb-4 uppercase">Scale</div>
+<div class="text-4xl font-bold mb-6">$4,999<span class="text-sm font-normal text-gray-400">/mo</span></div>
+<ul class="space-y-4 mb-10 text-sm">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> Custom Agent Suite</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> Unlimited Lead Volume</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> Dedicated Success Manager</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check</span> Priority Beta Access</li>
+</ul>
+<button class="w-full border border-black py-3 font-bold uppercase hover:bg-black hover:text-white transition-colors">Contact Sales</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. SECONDARY LEAD CAPTURE -->
+<section class="py-24 bg-[#0A0A0A] text-white">
+<div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline-lg text-4xl mb-6 uppercase tracking-tighter">Ready to Stop Doing This Manually?</h2>
+<p class="text-gray-400 text-lg mb-10">Chat with a Kirality specialist today and see exactly how many hours your team could save next month.</p>
+<div class="space-y-6">
+<a class="flex items-center gap-4 hover:text-[#00FF41] transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-mono-data">WhatsApp: +1 (555) 098-7654</span>
+</a>
+<a class="flex items-center gap-4 hover:text-[#00FF41] transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-mono-data">hello@kiralitylabs.ai</span>
+</a>
+</div>
+</div>
+<div class="bg-white p-8 border border-[#262626]">
+<h3 class="text-black font-headline-md text-xl mb-6 uppercase">Talk to a Specialist</h3>
+<form class="space-y-4">
+<input class="w-full border border-[#E5E5E5] text-black px-4 py-3 outline-none focus:border-2 focus:border-[#00FF41] font-mono-data" placeholder="Your Name" type="text"/>
+<input class="w-full border border-[#E5E5E5] text-black px-4 py-3 outline-none focus:border-2 focus:border-[#00FF41] font-mono-data" placeholder="Your Work Email" type="email"/>
+<textarea class="w-full border border-[#E5E5E5] text-black px-4 py-3 outline-none focus:border-2 focus:border-[#00FF41] font-mono-data" placeholder="Tell us about your current bottlenecks..." rows="4"></textarea>
+<button class="w-full bg-[#00FF41] text-black font-bold uppercase py-4 transition-colors">Request Callback</button>
+</form>
+</div>
+</div>
+</section>
+<!-- 10. FAQ -->
+<section class="py-24 bg-white">
+<div class="max-w-3xl mx-auto px-8">
+<h2 class="font-headline-lg text-4xl mb-16 uppercase tracking-tighter text-center">Common Questions</h2>
+<div class="space-y-4">
+<details class="group border border-[#E5E5E5] p-6">
+<summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+                        Will the AI sound robotic?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="mt-4 text-secondary text-sm">No. We use proprietary fine-tuning based on your brand's existing content and voice to ensure every communication feels human and authentic.</p>
+</details>
+<details class="group border border-[#E5E5E5] p-6">
+<summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+                        How long does setup take?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="mt-4 text-secondary text-sm">A typical implementation takes between 7-14 days from initial blueprinting to full live operation.</p>
+</details>
+<details class="group border border-[#E5E5E5] p-6">
+<summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+                        Do I need a technical team?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="mt-4 text-secondary text-sm">Zero technical knowledge required. We handle all integrations and setup on your behalf.</p>
+</details>
+<details class="group border border-[#E5E5E5] p-6">
+<summary class="list-none cursor-pointer flex justify-between items-center font-bold uppercase text-sm">
+                        Is my data secure?
+                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<p class="mt-4 text-secondary text-sm">We are SOC2 Type II compliant. Your data is encrypted and never used to train global models.</p>
+</details>
+</div>
+</div>
+</section>
+<!-- 11. FINAL CTA -->
+<section class="py-32 bg-primary-container relative overflow-hidden">
+<div class="max-w-4xl mx-auto px-8 text-center relative z-10">
+<h2 class="font-headline-lg text-5xl md:text-6xl mb-12 uppercase tracking-tighter leading-none">Your Next Quarter Doesn't Have to Look Like the Last One</h2>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<button class="bg-black text-white px-10 py-5 font-bold uppercase text-lg hover:scale-105 transition-transform">Start Your Free Trial</button>
+<button class="border-2 border-black text-black px-10 py-5 font-bold uppercase text-lg hover:bg-black hover:text-[#00FF41] transition-all">View Demo Case Study</button>
+</div>
+</div>
+</section>
+<!-- 12. FOOTER -->
+<footer class="bg-white border-t border-[#E5E5E5] py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
+<div class="col-span-2">
+<div class="font-bold text-lg text-black mb-6">KIRALITY LABS</div>
+<p class="text-gray-500 text-xs max-w-xs mb-8">Building the future of revenue operations with autonomous agent technology.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-gray-400 hover:text-primary cursor-pointer">public</span>
+<span class="material-symbols-outlined text-gray-400 hover:text-primary cursor-pointer">share</span>
+<span class="material-symbols-outlined text-gray-400 hover:text-primary cursor-pointer">mail</span>
+</div>
+</div>
+<div>
+<h5 class="font-bold uppercase text-[10px] tracking-widest mb-6">Product</h5>
+<ul class="space-y-4 text-xs font-mono-data text-gray-500 uppercase">
+<li><a class="hover:text-primary" href="#">Lead Gen</a></li>
+<li><a class="hover:text-primary" href="#">Marketing</a></li>
+<li><a class="hover:text-primary" href="#">Social</a></li>
+<li><a class="hover:text-primary" href="#">Custom</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold uppercase text-[10px] tracking-widest mb-6">Company</h5>
+<ul class="space-y-4 text-xs font-mono-data text-gray-500 uppercase">
+<li><a class="hover:text-primary" href="#">About</a></li>
+<li><a class="hover:text-primary" href="#">Careers</a></li>
+<li><a class="hover:text-primary" href="#">Contact</a></li>
+<li><a class="hover:text-primary" href="#">Legal</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold uppercase text-[10px] tracking-widest mb-6">Resources</h5>
+<ul class="space-y-4 text-xs font-mono-data text-gray-500 uppercase">
+<li><a class="hover:text-primary" href="#">Blog</a></li>
+<li><a class="hover:text-primary" href="#">Docs</a></li>
+<li><a class="hover:text-primary" href="#">Guides</a></li>
+<li><a class="hover:text-primary" href="#">API</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-[#E5E5E5] pt-12 flex flex-col md:row justify-between items-center gap-4">
+<div class="font-mono-data text-[10px] text-gray-400 uppercase">© 2024 Kirality Labs. All rights reserved.</div>
+<div class="flex gap-8 text-[10px] font-mono-data uppercase text-gray-400">
+<a class="hover:text-black" href="#">Privacy Policy</a>
+<a class="hover:text-black" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
